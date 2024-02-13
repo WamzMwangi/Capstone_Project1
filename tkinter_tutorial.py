@@ -16,15 +16,22 @@ Iterations_dict={
 #create functions that display the questions after topic is chosen
 
 def variable_topic_chosen():
-    for questions in Variables_dict.keys():
+    for questions, choices in Variables_dict.items():
         q_label=tk.Label(window, text=questions)
-        q_label.pack
+        q_label.pack()
+        
+# now to display the choices in each question
+        for x in choices:
+           choices_button=tk.Radiobutton(window, text=x,)
+           choices_button.pack()
 
 def iterations_topic_chosen():
-    for questions in Iterations_dict.keys():
+    for questions, choices in Iterations_dict.items():
         q_label=tk.Label(window, text=questions)
-        q_label.pack
-
+        q_label.pack()
+        for x in choices:
+           choices_button=tk.Radiobutton(window, text=x,)
+           choices_button.pack()
 
 #create the basic layout of the GUI
 window=tk.Tk()
@@ -42,9 +49,8 @@ label.pack()
 topic1=tk.Button(window,text='VARIABLES', font=('Gothic',14),fg='green',command=variable_topic_chosen)
 topic1.pack()
 
-topic2=tk.Button(window,text='ITERATIONS', font=('Gothic',14),fg='green')
+topic2=tk.Button(window,text='ITERATIONS', font=('Gothic',14),fg='green',command=iterations_topic_chosen)
 topic2.pack()
 
 window.mainloop()
 
-#now to add functionality to the buttons
