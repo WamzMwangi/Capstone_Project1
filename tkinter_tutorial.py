@@ -29,10 +29,14 @@ def display_quiz():
         for x in choices:
             choices_button=ttk.Radiobutton(window, text=x, variable=student_answer,value=x)
             choices_button.pack()
-
+        current_q_index=current_q_index+1
+        Next_button=tk.Button(window, text ='Next', command= display_quiz)
+        Next_button.pack()
     else:
-       messagebox.showinfo('Well Done!!','This is the end of the QUIZ')
+         messagebox.showinfo('Well Done!!','This is the end of the QUIZ')
 
+#Now we include a function to take user to next question
+#def next_q(current_index):
 
 
 #create the basic layout of the GUI
@@ -54,10 +58,6 @@ label.pack()
 
 topic2=tk.Button(window,text='ITERATIONS', font=('Gothic',14),fg='green',command=display_quiz)
 topic2.pack()
-
-multichoice_frame=tk.Frame(window)
-multichoice_frame.pack(padx=40,pady=40)
-
 
 window.mainloop()
 
