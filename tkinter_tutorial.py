@@ -13,25 +13,27 @@ Iterations_dict={
                 'while" loops can only iterate over numbers, for loops can iterate over any data type'],
     'How do you exit a loop prematurely in python?':['exit statement', 'stop statement','break statement','range statement']
 }
-#create functions that display the questions after topic is chosen
+#counter for questions
+current_q_index=0
 
-def variable_topic_chosen():
-    for questions, choices in Variables_dict.items():
+#Now to display each question at a time
+def display_quiz():
+    for widget in window.winfo_children():
+        widget.destroy()
+    global current_q_index
+    if current_q_index<len(Iterations_dict):
+        questions, choices=list(Iterations_dict.items())[current_q_index]
         q_label=tk.Label(window, text=questions)
         q_label.pack()
         
-# now to display the choices in each question
         for x in choices:
-           choices_button=tk.Radiobutton(window, text=x,)
-           choices_button.pack()
+            choices_button=ttk.Radiobutton(window, text=x, variable=student_answer,value=x)
+            choices_button.pack()
 
-def iterations_topic_chosen():
-    for questions, choices in Iterations_dict.items():
-        q_label=tk.Label(window, text=questions)
-        q_label.pack()
-        for x in choices:
-           choices_button=tk.Radiobutton(window, text=x,)
-           choices_button.pack()
+    else:
+       messagebox.showinfo('Well Done!!','This is the end of the QUIZ')
+
+
 
 #create the basic layout of the GUI
 window=tk.Tk()
@@ -40,17 +42,22 @@ window=tk.Tk()
 window.geometry('800x500')
 window.title('Studdy Buddy Quiz App')
 
+student_answer=tk.StringVar()
 label=tk.Label(window, text='Test your knowledge of Python with StudyBuddy!!!', font=('Times New Roman',24), fg='blue')
 label.pack(padx=10,pady=10)
 
 label=tk.Label(window,text='Please choose a topic you want to study', font=('Times New Roamn',18))
 label.pack()
 
-topic1=tk.Button(window,text='VARIABLES', font=('Gothic',14),fg='green',command=variable_topic_chosen)
-topic1.pack()
+#topic1=tk.Button(window,text='VARIABLES', font=('Gothic',14),fg='green',command=variable_topic_chosen)
+#topic1.pack()
 
-topic2=tk.Button(window,text='ITERATIONS', font=('Gothic',14),fg='green',command=iterations_topic_chosen)
+topic2=tk.Button(window,text='ITERATIONS', font=('Gothic',14),fg='green',command=display_quiz)
 topic2.pack()
+
+multichoice_frame=tk.Frame(window)
+multichoice_frame.pack(padx=40,pady=40)
+
 
 window.mainloop()
 
