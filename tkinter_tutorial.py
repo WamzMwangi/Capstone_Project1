@@ -23,6 +23,7 @@ def check_answer():
     if correct_answer==selected_answer:
         labelA=tk.Label(window,text='CORRECT!', font=('Helvetica',20),fg='blue')
         labelA.pack()
+        score_count=score_count+1
     else:
         LabelW=tk.Label(window,text=f'Sorry!!!\n the correct answer is\n {correct_answer}', font=('Helvetica,20'),fg='blue')
         LabelW.pack()
@@ -35,7 +36,9 @@ def display_quiz():
     if current_q_index<len(Questions_dict):
         questions, choices=list(Questions_dict.items())[current_q_index]
         q_label=tk.Label(window, text=questions)
-        q_label.pack()
+        q_label.pack()\
+    
+        user_answer.set('')
         
         for x in choices:
             choices_button=ttk.Radiobutton(window, text=x, variable=user_answer,value=x)
@@ -47,7 +50,7 @@ def display_quiz():
         check_button.pack()
 
     else:
-         messagebox.showinfo('Well Done!!','This is the end of the QUIZ')
+         messagebox.showinfo('Well Done!!',f'Your score is {score_count}')
   
 
 #create the basic layout of the GUI
