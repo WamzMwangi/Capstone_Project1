@@ -19,16 +19,19 @@ score_count=0
 def check_answer():
     global current_q_index, score_count
     selected_answer=user_answer.get()
-    correct_answer=Iterations_dict[list(Iterations_dict.keys())[current_q_index]][2]
+    correct_answer=Iterations_dict[list(Iterations_dict.keys())[current_q_index-1]][2]
     if correct_answer==selected_answer:
         labelA=tk.Label(window,text='CORRECT!', font=('Helvetica',20),fg='blue')
         labelA.pack()
+    else:
+        LabelW=tk.Label(window,text=f'Sorry!!!\n, the correct answer is {correct_answer}', font=('Helvetica,20'),fg='blue')
+        LabelW.pack()
 
 #Now to display each question at a time
 def display_quiz():
     for widget in window.winfo_children():
         widget.destroy()
-    global current_q_index,user_answer,sorted
+    global current_q_index,user_answer
     if current_q_index<len(Iterations_dict):
         questions, choices=list(Iterations_dict.items())[current_q_index]
         q_label=tk.Label(window, text=questions)
@@ -40,6 +43,9 @@ def display_quiz():
         current_q_index=current_q_index+1
         Next_button=tk.Button(window, text ='Next', command= display_quiz)
         Next_button.pack()
+        check_button=tk.Button(window,text='Check Answer',command=check_answer)
+        check_button.pack()
+
     else:
          messagebox.showinfo('Well Done!!','This is the end of the QUIZ')
   
@@ -60,6 +66,9 @@ label.pack()
 
 topic2=tk.Button(window,text='ITERATIONS', font=('Gothic',14),fg='green',command=display_quiz)
 topic2.pack()
+
+check_button=tk.Button(window,text='Check Answer',font=('Gothic',20),fg='blue',command=check_answer)
+check_button.pack()
 
 window.mainloop()
 
