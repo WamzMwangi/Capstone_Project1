@@ -35,7 +35,7 @@ def display_quiz():
     global current_q_index,user_answer
     if current_q_index<len(Questions_dict):
         questions, choices=list(Questions_dict.items())[current_q_index]
-        q_label=tk.Label(window, text=questions)
+        q_label=tk.Label(window, text=questions, font=('Gothic,25'),fg='blue')
         q_label.pack()\
     
         user_answer.set('')
